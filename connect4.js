@@ -57,9 +57,9 @@ function makeHtmlBoard() {
     let row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
-      let cell = document.createElement("tc");
+      let cell = document.createElement("td");
       // TODO: add an id, y-x, to the above table cell element
-      cell.setAttribute("id", y - x);
+      cell.setAttribute("id", `${y}-${x}`);
       // you'll use this later, so make sure you use y-x
 
       // TODO: append the table cell to the table row
@@ -81,6 +81,13 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  let piece = document.createElement("div");
+  piece.classList.add("piece");
+  piece.classList.add("player");
+  //piece.createAttribute("class", player); // need to revisit ******************************** `${p1}${p2}`
+  console.log(piece);
+  let cell = document.getElementById(`${y}-${x}`);
+  cell.append(piece);
 }
 
 /** endGame: announce game end */
