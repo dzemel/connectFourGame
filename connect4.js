@@ -113,7 +113,7 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
-  board[y][x] = "PLAYER 1 or 2s CHECKER"; // WE need to come back and change this.
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win
@@ -141,19 +141,11 @@ function checkForWin() {
    */
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
-    for (let i = 0; i < cells.length; i++) {
-      if (
-        cells[0] >= 0 &&
-        cells[0] < 5 &&
-        cells[1] >= 0 &&
-        cells[1] < 6 &&
-        cells[0][1] === currPlayer
-      ) {
-        return true;
-      }
-    }
-    // player
+    return cells.every(
+      ([y,x]) => y >= 0 && y < 6 && 
+    x >= 0 && x < 7 && board[y][x] === currPlayer);
   }
+    // player
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
   // for 4 cells (starting here) for each of the different
@@ -171,10 +163,24 @@ function checkForWin() {
         [y, x + 2],
         [y, x + 3],
       ];
-      let vert;
-      let diagDL;
-      let diagDR;
-
+      let vert = [
+        [y, x],
+        [y + 1, x],
+        [y + 2, x],
+        [y + 3, x],
+      ];      
+      let diagDL = [
+        [y, x],
+        [y + 1, x - 1],
+        [y + 2, x - 2],
+        [y + 3, x - 3],
+      ];
+      let diagDR = [
+        [y, x],
+        [y + 1, x + 1],
+        [y + 2, x + 2],
+        [y + 3, x + 3],
+      ];
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
