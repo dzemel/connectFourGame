@@ -113,7 +113,7 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
-  board[y][x] = 'PLAYER 1 or 2s CHECKER' // WE need to come back and change this.
+  board[y][x] = "PLAYER 1 or 2s CHECKER"; // WE need to come back and change this.
   placeInTable(y, x);
 
   // check for win
@@ -123,13 +123,13 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  if (board.every(val => val !== null)) {
+  if (board.every((val) => val !== null)) {
     endGame();
-  };
+  }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   currPlayer = currPlayer === 1 ? 2 : 1;
-};
+}
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
@@ -141,6 +141,17 @@ function checkForWin() {
    */
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
+    for (let i = 0; i < cells.length; i++) {
+      if (
+        cells[0] >= 0 &&
+        cells[0] < 5 &&
+        cells[1] >= 0 &&
+        cells[1] < 6 &&
+        cells[0][1] === currPlayer
+      ) {
+        return true;
+      }
+    }
     // player
   }
 
